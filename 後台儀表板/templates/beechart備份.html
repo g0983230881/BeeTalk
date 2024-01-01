@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BeeTalk</title>
+		<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"/>
+		<link rel="stylesheet" href="./static/css/font-awesome.min.css">
+		<link rel="stylesheet" href="./static/css/bootstrap.min.css">
+		<script type="text/javascript" src="./static/script/jquery.min.js"> </script>
+		<script type="text/javascript" src="./static/script/Chart.js"></script>
+		<script type="text/javascript" src="./static/script/Chart.bundle.js"></script>
+		<script type="text/javascript" src="./static/script/Chart.bundle.min.js"></script>
+		<script type="text/javascript" src="./static/script/Chart.min.js"></script>
+		<script type="text/javascript" src="./static/script/utils.js"></script>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery-1.8.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./static/js/csmapi.js"></script>
+  <script type="text/javascript" src="./static/js/demo_frame.js"></script>
+  <script type="text/javascript" src="./static/js/d3-liquidFillGauge.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.css" />
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.js"></script>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+	
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<title>
+	BeeChart
+	</title>
+	</head>
+	<body>
+	
+	<style>
+	html,body,#myChart{height: 55%;width: 35%;}
+	html,body,#myChart2{height: 55%;width: 35%;}
+	html,body,#myChart3{height: 55%;width: 35%;}
+	<!-- html,body,#myChart4{height: 45%;width: 30%;} -->
+	<!-- html,body,#myChart5{height: 45%;width: 30%;} -->
+	#jack{
+	position:absolute;
+	top:80px;
+    left:1000px;
+	}
+	#jack2{
+	position:absolute;
+	top:380px;
+    left:1000px;
+	}
+	#jack3{
+	position:absolute;
+	top:660px;
+    left:1000px;
+	}
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+	#BeeChart{
+	position:absolute;
+	left:850px;
+	}
+	#myChart3{
+	position:absolute;
+	left:300px;
+	top:620px;
+	z-index: 1;
+	}
+	#myChart2{
+	position:absolute;
+	left:300px;
+	top:340px;
+	z-index: 1;
+	}
+	#myChart{
+	position:absolute;
+	left:300px;
+	top:70px;
+	z-index: 1;
+	}
+	<!-- #myChart4{ -->
+	<!-- position:absolute; -->
+	<!-- left:280px; -->
+	<!-- top:70px; -->
+	<!-- } -->
+	<!-- #myChart5{ -->
+	<!-- position:absolute; -->
+	<!-- left:280px; -->
+	<!-- top:340px; -->
+	<!-- } -->
+	#title_name{
+	position:absolute;
+	left:480px;
+	top:50px;
+	z-index: 2;
+	font-size:33pt;
+	}
+	#title_name2{
+	position:absolute;
+	left:480px;
+	top:320px;
+	z-index: 2;
+	font-size:33pt;
+	}
+	#title_name3{
+	position:absolute;
+	left:550px;
+	top:620px;
+	z-index: 2;
+	font-size:33pt;
+	}
+	#GaugePanel{
+	position:absolute;
+	left:600px;
+	top:100px;
+	}
+	#GaugePanel2{
+	position:absolute;
+	left:600px;
+	top:370px;
+	}
+	#button{
+	position:absolute;
+	left:0px;
+	top:0px;
+	}
+	</style>
+	<div id ='BeeChart'style="font-size: 50px; text-align:center;">BeeChart</div>
+	<div id='title_name'>當前室外溫濕度</div>
+	<div id='title_name2'>當前室內溫濕度</div>
+	<div id='title_name3'>當前重量</div>
+	<!--<img id='imgg' src="./static/image/bee.png">-->
+	<div id='myChart'></div>
+	<div id='myChart2'></div>
+	<div id='myChart3'></div>
+	<div id='myChart4'></div>
+	<div id='myChart5'></div>
+    
+	<div id="jack3" style="width:600px; height:50px"></div>
+	<div id="jack" style="width:600px; height:50px"></div>
+	<div id="jack2" style="width:600px; height:50px"></div>
+	
+	<div id="GaugePanel" style="width: 600px;">
+				<svg id="fillgauge4" width="59%" height="200"></svg>
+	</div>
+	<div id="GaugePanel2" style="width: 600px;">
+				<svg id="fillgauge5" width="59%" height="200" ></svg>
+	</div>
+	<p id='button'><a href=bee><button class=grey style="height:25px;width:120px">Home Page</a></p>
+	</body>
+<script>
+    window.setInterval(test, 5000);
+    function test() {
+        var ydTEMP = [];//溫度
+        var ydRH = [];//濕度
+        var xd = [];//title
+        var xdtime = [];//title
+        var jsonobj = null
+
+       $.getJSON("/setT/", {}, function (r) {
+            jsonobj = r;
+            for (var jack = 0; jack <10; jack++) {
+               // xd.push(jack.toString());
+                xdtime.push(jsonobj["time"][jack]);//time
+                ydTEMP.push(parseFloat(jsonobj["data"][jack]))//O
+				ydRH.push(parseFloat(jsonobj["data2"][jack]))//O
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: xdtime,
+                    datasets: [{
+                        label: '平均室外溫度',
+                        fill: false,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data:ydTEMP,
+
+                    }, {
+                        label: '平均室外濕度%',
+						
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: ydRH ,
+                        }]
+                },
+                options: {
+					
+				
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+                    responsive: true,
+                    /*title: {
+                        display: true,
+                        text: '溫溼度感測器'
+                    },*/
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true,
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    /*scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'SENSOR DATA'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }*/
+                }
+            };
+            $('#jack').html("");
+            $('#jack').append('<canvas id="canvas"></canvas>');
+			var ctx = document.getElementById('canvas').getContext('2d');
+			line = new Chart(ctx, config);
+       });
+    }
+</script>
+<script>
+    window.setInterval(test2, 5000);
+    function test2() {
+        var ydTEMP = [];//溫度
+        var ydRH = [];//濕度
+        var xd = [];//title
+        var xdtime = [];//title
+        var jsonobj = null
+
+       $.getJSON("/setT2/", {}, function (r) {
+            jsonobj = r;
+            for (var jack = 0; jack <10; jack++) {
+               // xd.push(jack.toString());
+                xdtime.push(jsonobj["time"][jack]);//time
+                ydTEMP.push(parseFloat(jsonobj["data"][jack]))//O
+				ydRH.push(parseFloat(jsonobj["data2"][jack]))//O
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: xdtime,
+                    datasets: [{
+                        label: '平均室內溫度',
+                        fill: false,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data:ydTEMP,
+                    }, {
+                        label: '平均室內濕度%',
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: ydRH ,
+                        }]
+                },
+                options: {
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+                    responsive: true,
+                    /*title: {
+                        display: true,
+                        text: '溫溼度感測器'
+                    },*/
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true,
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    /*scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'SENSOR DATA'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }*/
+                }
+            };
+            $('#jack2').html("");
+            $('#jack2').append('<canvas id="canvas2"></canvas>');
+			var ctx = document.getElementById('canvas2').getContext('2d');
+			line = new Chart(ctx, config);
+       });
+    }
+</script>
+<script>
+
+    window.setInterval(test3, 5000);
+    function test3() {
+        var ydTEMP = [];//溫度
+        //var ydRH = [];//濕度
+        var xd = [];//title
+        var xdtime = [];//title
+        var jsonobj = null
+
+       $.getJSON("/setT3/", {}, function (r) {
+            jsonobj = r;
+            for (var jack = 0; jack <10; jack++) {
+               // xd.push(jack.toString());
+                xdtime.push(jsonobj["time"][jack]);//time
+                ydTEMP.push(parseFloat(jsonobj["data"][jack]))//O
+				//ydRH.push(parseFloat(jsonobj["data2"][jack]))//O
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: xdtime,
+                    datasets: [{
+                        label: '平均重量',
+                        fill: false,
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data:ydTEMP,
+                    }], /*{
+                        label: '濕度%',
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: ydRH ,
+                        }]*/
+                },
+                options: {
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+                    responsive: true,
+                    /*title: {
+                        display: true,
+                        text: '溫溼度感測器'
+                    },*/
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true,
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    /*scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'SENSOR DATA'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }*/
+                }
+            };
+			
+			
+            $('#jack3').html("");
+            $('#jack3').append('<canvas id="canvas3"></canvas>');
+			var ctx = document.getElementById('canvas3').getContext('2d');
+			line = new Chart(ctx, config);
+       });
+    }
+</script>	
+<script>
+out_temp=[];
+function chart_out_temp(x){
+out_temp=x;
+
+var myConfig1 = {
+  "type":"gauge", 
+  "series":[
+    {"values":[out_temp]}
+  ]
+};
+zingchart.render({ 
+	id : 'myChart', 
+	data : myConfig1, 
+	height : "50%", 
+	width: "50%" 
+})};
+</script>
+<script>
+in_temp=[];
+function chart_in_temp(x){
+var myConfig2 = {
+  "type":"gauge", 
+  "series":[
+    {"values":[in_temp]}
+  ]
+};
+
+
+zingchart.render({ 
+	id : 'myChart2', 
+	data : myConfig2, 
+	height : "50%", 
+	width: "50%" 
+})};
+</script>	
+<script>
+weight=[];
+function chart_weight(x){
+var myConfig3 = {
+  "type":"gauge", 
+  "series":[
+    {"values":[weight]}
+  ]
+};
+
+
+zingchart.render({ 
+	id : 'myChart3', 
+	data : myConfig3, 
+	height : "50%", 
+	width: "50%" 
+})};
+</script>	
+<!-- <script> -->
+<!-- out_humid=[]; -->
+<!-- function chart_out_humid(x){ -->
+<!-- var myConfig4 = { -->
+  <!-- "type":"gauge",  -->
+  <!-- "series":[ -->
+    <!-- {"values":[out_humid]} -->
+  <!-- ] -->
+<!-- }; -->
+
+
+<!-- zingchart.render({  -->
+	<!-- id : 'myChart4',  -->
+	<!-- data : myConfig4,  -->
+	<!-- height : "50%",  -->
+	<!-- width: "50%"  -->
+<!-- })}; -->
+<!-- </script> -->
+<!-- <script> -->
+<!-- in_humid=[]; -->
+<!-- function chart_in_humid(x){ -->
+<!-- var myConfig5 = { -->
+  <!-- "type":"gauge",  -->
+  <!-- "series":[ -->
+    <!-- {"values":[in_humid]} -->
+  <!-- ] -->
+<!-- }; -->
+
+
+<!-- zingchart.render({  -->
+	<!-- id : 'myChart5',  -->
+	<!-- data : myConfig5,  -->
+	<!-- height : "50%",  -->
+	<!-- width: "50%"  -->
+<!-- })}; -->
+</script>
+<script>
+out_temp=[];
+out_humid=[];
+in_temp=[];
+in_humid=[];
+weight=[];
+$(document).ready(function() {
+    daiSDK = dai("bbeetalk",[],["OUT_Temp_O","OUT_Humid_O","IN_Temp_O","IN_Humid_O","WEIGHT_O"]);
+	$(window).on('iotTalkUpdate3', function(e) {
+        var arr = e.dataArr;
+		if(e.df_name=="OUT_Temp_O"){
+			/*document.getElementById("tem").innerText=arr[0][1][0];*/	
+			out_temp=arr[0][1][0];
+			chart_out_temp(out_temp);
+			/*chart_out_temp2(out_temp);*/
+		}
+		if(e.df_name=="OUT_Humid_O"){
+			/*document.getElementById("hum").innerText=arr[0][1][0];*/
+			out_humid=arr[0][1][0];
+			chart_out_humid(out_humid);
+			/*chart_out_humid2(out_humid);*/
+		}
+		if(e.df_name=="IN_Temp_O"){
+			/*document.getElementById("tem2").innerText=arr[0][1][0];*/
+			in_temp=arr[0][1][0];
+			chart_in_temp(in_temp);
+			/*chart_in_temp2(in_temp);*/
+		}
+		if(e.df_name=="IN_Humid_O"){
+			/*document.getElementById("hum2").innerText=arr[0][1][0];*/
+			in_humid=arr[0][1][0];
+			chart_in_humid(in_humid);
+			/*chart_in_humid2(in_humid);*/
+		}
+		if(e.df_name=="WEIGHT_O"){
+			/*document.getElementById("bee_weight").innerText=arr[0][1][0];*/
+			weight=arr[0][1][0];
+			chart_weight(weight);
+			/*chart_weight2(weight);*/
+		}	
+    });
+	
+	setInterval(function() {
+        //daiSDK.refresh("xmas_control_odf");
+    }, 10000);
+	
+});
+</script>
+<script>
+out_humid=[];
+function chart_out_humid(x){
+var config3 = liquidFillGaugeDefaultSettings();
+                 config3.textVertPosition = 0.5
+                 config3.waveAnimateTime = 1000;
+config3.valueCountUp = true;
+                 config3.displayPercent = true;
+                 config3.waveCount = 1;
+var gauge4 = loadLiquidFillGauge("fillgauge4", out_humid, config3);
+}
+</script>
+<script>
+in_humid=[];
+function chart_in_humid(x){
+var config3 = liquidFillGaugeDefaultSettings();
+                 config3.textVertPosition = 0.5
+                 config3.waveAnimateTime = 1000;
+config3.valueCountUp = true;
+                 config3.displayPercent = true;
+                 config3.waveCount = 1;
+var gauge5 = loadLiquidFillGauge("fillgauge5", in_humid, config3);
+}
+</script>
+</html>

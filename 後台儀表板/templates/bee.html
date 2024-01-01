@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="utf-8">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>BeeTalk</title>
+		<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"/>
+		<link rel="stylesheet" href="./static/css/font-awesome.min.css">
+		<link rel="stylesheet" href="./static/css/bootstrap.min.css">
+		<script type="text/javascript" src="./static/script/jquery.min.js"> </script>
+		<script type="text/javascript" src="./static/script/Chart.js"></script>
+		<script type="text/javascript" src="./static/script/Chart.bundle.js"></script>
+		<script type="text/javascript" src="./static/script/Chart.bundle.min.js"></script>
+		<script type="text/javascript" src="./static/script/Chart.min.js"></script>
+		<script type="text/javascript" src="./static/script/utils.js"></script>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery-1.8.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./static/js/csmapi.js"></script>
+  <script type="text/javascript" src="./static/js/demo_frame.js"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.css" />
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.js"></script>
+    </head>
+	<title>
+	BeeTalk
+	</title>
+    <body>
+	<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+	</style>
+
+					<!-- 主頁面 -->
+						
+                    <table style="table-layout:fixed;width: 1900px;background:#0B73C3;border-spacing:40px 20px;">
+                        <tbody>
+                        <tr >
+                        <td style="color: #FFFFFF; font-size: 50px; text-align:center;vertical-align:middle;" colspan="5">
+						<strong>BeeTalk
+						<img src="./static/image/bee.png">
+						</td>
+                        </tr>
+                        <tr >
+                        <!--<td style="border-bottom:4mm ridge #f7baab;font-size: 45px;"><center><font color="#FFF"><strong>偵測影像</td>-->
+                        <td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong>進出計數</td>
+                        <td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong>重量數值</td>
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong>當前室外溫溼度</td>
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong>當前室內溫溼度</td>
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong>控制狀態</td>
+                        </tr>
+                        <tr>
+                        <!--<td style="height: 21px;" rowspan="3">
+                            <!--<img src="hive.jpg" width="100%">	
+                        </td>-->
+                        <td style="color: #ffffff; font-size: 30px; text-align:center;vertical-align:top;"><strong><div>進入:<p id="bee_enter"></p></div><div>出去:<p id="bee_out"></p></div></strong></strong></td>
+						<td style="color: #ffffff; font-size: 30px; text-align:center;vertical-align:top;"><strong>目前重量(kg):<p id ="bee_weight"></p><br></strong></td>
+						<td style="color: #ffffff; font-size: 30px; text-align:center;vertical-align:top;"><strong><div>溫度(°C):<p id="tem"></p></div><div>濕度(%):<p id="hum"></p></div></strong></td>
+						<td style="color: #ffffff; font-size: 30px; text-align:center;vertical-align:top;"><strong><div>溫度(°C):<p id="tem2"></p></div><div>濕度(%):<p id="hum2"></p></div></strong></td>
+						<td style="color: #ffffff; font-size: 30px; text-align:center;vertical-align:top;"><strong>當前狀態<div>遮罩:<p id ="CT_static">自動偵測</p></div><div>糖水:<p id ="SG_static">自動偵測</p></div></strong></td>
+                        <!--<td style="width: 200px;color: #fffb00; font-size: 10px; text-align:center;vertical-align:top;" rowspan="3"><img src="" id="ALCO" width="100%"></td>-->
+                        </tr>
+						<!--<tr>
+						<td></td>
+						<td><div id="jack3" style="width:350px; height:200px"></div></td>
+						<td><div id="jack" style="width:350px; height:200px"></div></td>
+						<td><div id="jack2" style="width:350px; height:200px"></div></td>
+						<td></td>
+						</tr>	-->				
+                        <tr>
+                        <!--<td style="height: 21px;" rowspan="5"><center><img src="" width="100%"></td>-->
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong><br><br>偵測影像</td>
+                        <td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong><br><br></td>
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong><br><br></td>						
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong><br><br></td>
+						<td style="border-bottom:4mm ridge #ffffff;font-size: 30px;"><center><font color="#FFF"><strong><br><br>按鈕控制</td>
+						<!--<td style="border-bottom:4mm ridge #f7baab;font-size: 45px;"><center><font color="#FFF"><strong><br><br>數據圖表</td>
+						<td style="border-bottom:4mm ridge #f7baab;font-size: 45px;"><center><font color="#FFF"><strong><br><br></td>-->
+                        </tr>
+                        <tr>
+						<!--<button type="on" style="height:42px; line-height:42px; background-color:#005798; padding:0 20px; font-size:18px; color:#fff; transition:.2s;">遮罩開啟</button>-->
+						<td>
+						<!--<video src="" controls autoplay loop muted style="width:600px; height:300px" ></video>-->
+						<!--<iframe width="600" height="300" src="https://www.youtube.com/embed/PjLsgWcjUSM" title="「陳柏希」直播" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+						<div class="container"> 
+							<div class="row"> 
+								<div class="col-lg-8 offset-lg-2"> 
+								<img src="{{ url_for('video_feed') }}" width="85%" height="50%">
+								</div> 
+							</div> 
+						</div> 
+						</td>
+						<td></td>
+						<td></td>
+						<td><p><a href=beechart><button class=grey style="height:40px;width:150px;font-size:30px;">beechart</a></p></td>
+						<td style="font-size: 30px;">
+						<!--<td style="height: 21px;font-size: 30px; text-align:center;vertical-align:top;">-->
+						<input type="button"  onclick="disableElement();" value="switch shell" />
+						<hr>
+						<input type="button" id="sw_s_o" onclick="shell('open');"  value="shell_open" />
+						<input type="button" id="sw_s_c" onclick="shell('close');" value="shell_close" />
+						<input type="button" id="sw_s_a" onclick="shell('auto');"  disabled="disabled"  value="shell_auto" />
+						<hr>
+						<input type="button" onclick="sugar('manual');" value="sugar_manual" />
+						<!--<input type="button" onclick="sugar('auto');" value="sugar_auto"/>-->
+						</td>
+                        </tr>
+                        </tbody>
+						
+						
+                    </table>
+    
+                
+            
+        </body>
+		<script>
+			i=0;
+		function disableElement(){
+			if(i==0){
+			document.getElementById("sw_s_o").disabled=true;
+			document.getElementById("sw_s_c").disabled=true;
+			document.getElementById("sw_s_a").disabled=false;
+				i=1;
+			}else{
+			document.getElementById("sw_s_o").disabled=false;
+			document.getElementById("sw_s_c").disabled=false;
+			document.getElementById("sw_s_a").disabled=true;
+				i=0;
+			}
+}
+		</script>
+		<script>
+$(document).ready(function() {
+    daiSDK = dai("bbeetalk",[],["OUT_Temp_O","OUT_Humid_O","IN_Temp_O","IN_Humid_O","WEIGHT_O"]);
+	$(window).on('iotTalkUpdate3', function(e) {
+        var arr = e.dataArr;
+		/*if(e.df_name=="CO_O"){
+			document.getElementById("co").innerText=arr[0][1][0];
+		}*/
+		if(e.df_name=="OUT_Temp_O"){
+			document.getElementById("tem").innerText=arr[0][1][0];
+			/*if(document.getElementById("tem").innerText>33.0){
+				document.getElementById("now_static").innerText="稍熱";
+			}else if(document.getElementById("tem").innerText<32.0){
+				document.getElementById("now_static").innerText="稍冷";
+			}else{
+				document.getElementById("now_static").innerText="正常";
+			}*/
+		}
+		if(e.df_name=="OUT_Humid_O"){
+			document.getElementById("hum").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="IN_Temp_O"){
+			document.getElementById("tem2").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="IN_Humid_O"){
+			document.getElementById("hum2").innerText=arr[0][1][0];
+		}
+		if(e.df_name=="WEIGHT_O"){
+			document.getElementById("bee_weight").innerText=arr[0][1][0];
+		}
+
+		
+		
+    });
+	
+	setInterval(function() {
+        //daiSDK.refresh("xmas_control_odf");
+    }, 10000);
+	
+});
+
+function shell(val){
+	 $.getJSON("/relay/"+val, {}, function (r) {});
+	if(val=='open'){
+		document.getElementById("CT_static").innerText="手動開啟";
+	}else if(val=='close'){
+		document.getElementById("CT_static").innerText="手動關閉";
+	}else{
+		document.getElementById("CT_static").innerText="自動偵測";
+	}
+	}
+function sugar(val){
+	 $.getJSON("/relay1/"+val, {}, function (r) {});
+	if(val=='manual'){document.getElementById("SG_static").innerText="手動補給";
+	}
+	/*else{document.getElementById("SG_static").innerText="自動偵測"} */
+	}
+	
+</script>
+<!--
+
+<script>
+    window.setInterval(test, 5000);
+    function test() {
+        var ydTEMP = [];//溫度
+        var ydRH = [];//濕度
+        var xd = [];//title
+        var xdtime = [];//title
+        var jsonobj = null
+
+       $.getJSON("/setT/", {}, function (r) {
+            jsonobj = r;
+            for (var jack = 0; jack <10; jack++) {
+               // xd.push(jack.toString());
+                xdtime.push(jsonobj["time"][jack]);//time
+                ydTEMP.push(parseFloat(jsonobj["data"][jack]))//O
+				ydRH.push(parseFloat(jsonobj["data2"][jack]))//O
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: xdtime,
+                    datasets: [{
+                        label: '溫度',
+                        fill: false,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data:ydTEMP,
+
+                    }, {
+                        label: '濕度%',
+						
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: ydRH ,
+                        }]
+                },
+                options: {
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+                    responsive: true,
+                    /*title: {
+                        display: true,
+                        text: '溫溼度感測器'
+                    },*/
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true,
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    /*scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'SENSOR DATA'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }*/
+                }
+            };
+            $('#jack').html("");
+            $('#jack').append('<canvas id="canvas"></canvas>');
+			var ctx = document.getElementById('canvas').getContext('2d');
+			line = new Chart(ctx, config);
+       });
+    }
+</script>
+<script>
+    window.setInterval(test2, 5000);
+    function test2() {
+        var ydTEMP = [];//溫度
+        var ydRH = [];//濕度
+        var xd = [];//title
+        var xdtime = [];//title
+        var jsonobj = null
+
+       $.getJSON("/setT2/", {}, function (r) {
+            jsonobj = r;
+            for (var jack = 0; jack <10; jack++) {
+               // xd.push(jack.toString());
+                xdtime.push(jsonobj["time"][jack]);//time
+                ydTEMP.push(parseFloat(jsonobj["data"][jack]))//O
+				ydRH.push(parseFloat(jsonobj["data2"][jack]))//O
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: xdtime,
+                    datasets: [{
+                        label: '溫度',
+                        fill: false,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data:ydTEMP,
+                    }, {
+                        label: '濕度%',
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: ydRH ,
+                        }]
+                },
+                options: {
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+                    responsive: true,
+                    /*title: {
+                        display: true,
+                        text: '溫溼度感測器'
+                    },*/
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true,
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    /*scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'SENSOR DATA'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }*/
+                }
+            };
+            $('#jack2').html("");
+            $('#jack2').append('<canvas id="canvas2"></canvas>');
+			var ctx = document.getElementById('canvas2').getContext('2d');
+			line = new Chart(ctx, config);
+       });
+    }
+</script>
+<script>
+
+    window.setInterval(test3, 5000);
+    function test3() {
+        var ydTEMP = [];//溫度
+        //var ydRH = [];//濕度
+        var xd = [];//title
+        var xdtime = [];//title
+        var jsonobj = null
+
+       $.getJSON("/setT3/", {}, function (r) {
+            jsonobj = r;
+            for (var jack = 0; jack <10; jack++) {
+               // xd.push(jack.toString());
+                xdtime.push(jsonobj["time"][jack]);//time
+                ydTEMP.push(parseFloat(jsonobj["data"][jack]))//O
+				//ydRH.push(parseFloat(jsonobj["data2"][jack]))//O
+            }
+            var config = {
+                type: 'line',
+                data: {
+                    labels: xdtime,
+                    datasets: [{
+                        label: '重量',
+                        fill: false,
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data:ydTEMP,
+                    }], /*{
+                        label: '濕度%',
+                        fill: false,
+                        backgroundColor: window.chartColors.yellow,
+                        borderColor: window.chartColors.yellow,
+                        data: ydRH ,
+                        }]*/
+                },
+                options: {
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    responsiveAnimationDuration: 0, // animation duration after a resize
+                    responsive: true,
+                    /*title: {
+                        display: true,
+                        text: '溫溼度感測器'
+                    },*/
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true,
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    /*scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'SENSOR DATA'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                        }]
+                    }*/
+                }
+            };
+			
+			
+            $('#jack3').html("");
+            $('#jack3').append('<canvas id="canvas3"></canvas>');
+			var ctx = document.getElementById('canvas3').getContext('2d');
+			line = new Chart(ctx, config);
+       });
+    }
+</script>
+
+-->    
+</html>

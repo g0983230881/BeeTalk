@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CONFIG>
+    <MSSQL>
+        <SERVER_NAME>MAX</SERVER_NAME>
+        <SERVER_ACCOUNT>sa</SERVER_ACCOUNT>
+        <SERVER_PASSWORD>softwan101</SERVER_PASSWORD>
+        <SERVER_DATABASE>wansto</SERVER_DATABASE>
+        <BS>DB.db</BS>
+    </MSSQL>
+    <SQLITE>
+        <SQLITE_FILE>init\DB.db</SQLITE_FILE>
+    </SQLITE>
+</CONFIG>

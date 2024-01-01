@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<div id="GaugePanel" style="width: 600px;margin: 0 auto;">
+            <svg id="fillgauge4" width="59%" height="200" onclick="gauge4.update(NewValue());"></svg>
+</div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="d3-liquidFillGauge.js"></script>
+<script>
+var config3 = liquidFillGaugeDefaultSettings();
+                 config3.textVertPosition = 0.5
+                 config3.waveAnimateTime = 1000;
+config3.valueCountUp = true;
+                 config3.displayPercent = true;
+                 config3.waveCount = 1;
+var gauge4 = loadLiquidFillGauge("fillgauge4", 54.91, config3);
+                 /*function NewValue() {
+                     if (Math.random() > .5) {
+                         return Math.round(Math.random() * 100);
+                     } else {
+                         return (Math.random() * 100).toFixed(1);
+                     }
+                 }*/
+</script>
